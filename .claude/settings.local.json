@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(npm --version)",
+      "Bash(brew list:*)",
+      "Bash(git --version)",
+      "Bash(brew install:*)",
+      "Bash(npm install:*)",
+      "Bash(vercel whoami:*)",
+      "Bash(gh api:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
