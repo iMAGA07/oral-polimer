@@ -23,3 +23,8 @@ pnpm-debug.log*
 
 # Vercel
 .vercel/
+.vercel
+.env*
+
+# Исходные видео с камеры (в репозиторий идут только сжатые из public/videos)
+/videos/

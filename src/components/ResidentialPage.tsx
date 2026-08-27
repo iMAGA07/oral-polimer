@@ -5,6 +5,7 @@ import { AnimatedSection } from "./AnimatedSection";
 import { useState, useEffect, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 import { PdfEmbedViewer } from "./PdfEmbedViewer";
+import { ProjectVideosSection } from "./ProjectVideosSection";
 
 // Import project images from special offer page
 import karavanImage from 'figma:asset/5d25a5f42f0d9704fd3463e929ec894b7774b53f.png';
@@ -287,6 +288,9 @@ export function ResidentialPage({ onNavigate, onOpenContactModal }: ResidentialP
           </div>
         </div>
       </section>
+
+      {/* Video Showcase */}
+      <ProjectVideosSection />
 
       {/* Stats Bar */}
       <section className="py-12 bg-white border-b border-border/30 relative">
