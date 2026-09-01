@@ -8,6 +8,8 @@ export interface PhoneContact {
   display: string;
   /** Ссылка для звонка */
   href: string;
+  /** Ссылка на WhatsApp этого же номера */
+  whatsapp: string;
 }
 
 /**
@@ -21,6 +23,7 @@ export const phones: PhoneContact[] = [
     hint: "Квартиры и жилые комплексы",
     display: "+7 (705) 501-20-10",
     href: "tel:+77055012010",
+    whatsapp: "https://wa.me/77055012010",
   },
   {
     id: "production",
@@ -28,6 +31,7 @@ export const phones: PhoneContact[] = [
     hint: "Продукция завода, ПГС и аренда техники",
     display: "+7 (775) 413-07-70",
     href: "tel:+77754130770",
+    whatsapp: "https://wa.me/77754130770",
   },
   {
     id: "general",
@@ -35,6 +39,7 @@ export const phones: PhoneContact[] = [
     hint: "По любым вопросам",
     display: "+7 (775) 707-77-00",
     href: "tel:+77757077700",
+    whatsapp: "https://wa.me/77757077700",
   },
 ];
 

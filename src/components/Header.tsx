@@ -1,4 +1,4 @@
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import Frame1 from "../imports/Frame1";
 import { Button } from "./ui/button";
@@ -94,8 +94,10 @@ export function Header({ currentSection, onNavigate }: HeaderProps) {
                   scrolled || currentSection !== "home" ? "text-primary" : "text-white"
                 } group-hover:text-accent`}
               >
-                <a href={generalPhone.href} className="whitespace-nowrap">
-                  {generalPhone.display}
+                <a href={generalPhone.href} className="flex items-center whitespace-nowrap">
+                  {/* На узких ноутбуках номер сворачивается в иконку, чтобы не наезжать на меню */}
+                  <Phone className="h-4 w-4 xl:hidden" />
+                  <span className="hidden xl:inline">{generalPhone.display}</span>
                 </a>
                 <ChevronDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />
               </div>
@@ -103,17 +105,30 @@ export function Header({ currentSection, onNavigate }: HeaderProps) {
               <div className="absolute right-0 top-full pt-4 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
                 <div className="w-80 bg-white rounded-2xl shadow-2xl border border-border/60 p-2">
                   {phones.map((phone) => (
-                    <a
+                    <div
                       key={phone.id}
-                      href={phone.href}
-                      className="block px-3 py-2.5 rounded-xl hover:bg-secondary transition-colors duration-200"
+                      className="px-3 py-2.5 rounded-xl hover:bg-secondary transition-colors duration-200"
                     >
                       <span className="block text-[11px] uppercase tracking-wide text-muted-foreground mb-0.5">
                         {phone.label}
                       </span>
-                      <span className="block text-primary font-semibold">{phone.display}</span>
+                      <div className="flex items-center justify-between gap-3">
+                        <a href={phone.href} className="text-primary font-semibold hover:text-accent transition-colors">
+                          {phone.display}
+                        </a>
+                        <a
+                          href={phone.whatsapp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Написать в WhatsApp"
+                          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-accent transition-colors"
+                        >
+                          <MessageCircle className="h-3.5 w-3.5" />
+                          WhatsApp
+                        </a>
+                      </div>
                       <span className="block text-xs text-muted-foreground mt-0.5">{phone.hint}</span>
-                    </a>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -167,12 +182,25 @@ export function Header({ currentSection, onNavigate }: HeaderProps) {
               <div className="px-4 pt-4 mt-2 border-t border-border">
                 <div className="space-y-3 mb-4">
                   {phones.map((phone) => (
-                    <a key={phone.id} href={phone.href} className="block">
+                    <div key={phone.id}>
                       <span className="block text-[11px] uppercase tracking-wide text-muted-foreground">
                         {phone.label}
                       </span>
-                      <span className="block text-primary font-medium">{phone.display}</span>
-                    </a>
+                      <div className="flex items-center justify-between gap-3">
+                        <a href={phone.href} className="text-primary font-medium">
+                          {phone.display}
+                        </a>
+                        <a
+                          href={phone.whatsapp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-xs text-muted-foreground"
+                        >
+                          <MessageCircle className="h-3.5 w-3.5" />
+                          WhatsApp
+                        </a>
+                      </div>
+                    </div>
                   ))}
                 </div>
                 <Button

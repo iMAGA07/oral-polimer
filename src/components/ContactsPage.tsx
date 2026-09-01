@@ -2,7 +2,7 @@ import { MapPin, Phone, Mail, Clock, Instagram, MessageCircle } from "lucide-rea
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { useEffect, useRef } from "react";
-import { phones } from "../utils/contacts";
+import { phones, realtyPhone, productionPhone, generalPhone } from "../utils/contacts";
 
 // Separate Map Component to handle lifecycle
 function MapViewer({ coordinates }: { coordinates: [number, number] }) {
@@ -79,10 +79,12 @@ export function ContactsPage() {
     {
       icon: Phone,
       title: "Телефон",
-      items: [
-        ...phones.map((phone) => ({ label: phone.label, value: phone.display })),
-        { label: "WhatsApp", value: "+7 (705) 501-20-10" },
-      ],
+      items: phones.map((phone) => ({
+        label: phone.label,
+        value: phone.display,
+        href: phone.href,
+        whatsapp: phone.whatsapp,
+      })),
     },
     {
       icon: Mail,
@@ -116,21 +118,21 @@ export function ContactsPage() {
     {
       name: "Главный офис и производство",
       address: "г. Уральск, Тюленина 47/1",
-      phone: "+7 (711) 234-56-78",
+      phone: generalPhone,
       email: "info@oral-polimer.kz",
       hours: "Пн-Пт: 9:00 - 18:00, Сб: 10:00 - 15:00",
     },
     {
       name: "Офис продаж квартир",
       address: "г. Уральск, Тюленина 47/1",
-      phone: "+7 (711) 234-56-78",
+      phone: realtyPhone,
       email: "info@oral-polimer.kz",
       hours: "Пн-Вс: 10:00 - 20:00",
     },
     {
       name: "Завод ЖБИ",
       address: "г. Уральск, Тюленина 47/1",
-      phone: "+7 (711) 234-56-79",
+      phone: productionPhone,
       email: "info@oral-polimer.kz",
       hours: "Пн-Пт: 8:00 - 17:00",
     },
@@ -171,10 +173,30 @@ export function ContactsPage() {
                     </div>
                     <h3 className="font-semibold text-primary mb-4">{contact.title}</h3>
                     <div className="space-y-3">
-                      {contact.items.map((item, idx) => (
+                      {contact.items.map((item: any, idx: number) => (
                         <div key={idx}>
                           <p className="text-xs text-muted-foreground mb-1">{item.label}</p>
-                          <p className="text-sm font-medium text-foreground">{item.value}</p>
+                          {item.href ? (
+                            <a
+                              href={item.href}
+                              className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+                            >
+                              {item.value}
+                            </a>
+                          ) : (
+                            <p className="text-sm font-medium text-foreground">{item.value}</p>
+                          )}
+                          {item.whatsapp && (
+                            <a
+                              href={item.whatsapp}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-1 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-accent transition-colors"
+                            >
+                              <MessageCircle className="h-3.5 w-3.5" />
+                              Написать в WhatsApp
+                            </a>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -235,10 +257,21 @@ export function ContactsPage() {
                       <div className="flex items-center gap-3">
                         <Phone className="h-4 w-4 text-accent flex-shrink-0" />
                         <a
-                          href={`tel:${office.phone}`}
+                          href={office.phone.href}
                           className="text-muted-foreground hover:text-accent transition-colors"
                         >
-                          {office.phone}
+                          {office.phone.display}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <MessageCircle className="h-4 w-4 text-accent flex-shrink-0" />
+                        <a
+                          href={office.phone.whatsapp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-accent transition-colors"
+                        >
+                          Написать в WhatsApp
                         </a>
                       </div>
                       <div className="flex items-center gap-3">
@@ -318,18 +351,24 @@ export function ContactsPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
+                  asChild
                   className="bg-primary hover:bg-primary/90 rounded-full px-8"
                 >
-                  <Phone className="mr-2 h-5 w-5" />
-                  +7 (711) 234-56-78
+                  <a href={generalPhone.href}>
+                    <Phone className="mr-2 h-5 w-5" />
+                    {generalPhone.display}
+                  </a>
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
+                  asChild
                   className="rounded-full px-8 border-primary/20 hover:bg-secondary"
                 >
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Написать в WhatsApp
+                  <a href={generalPhone.whatsapp} target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    Написать в WhatsApp
+                  </a>
                 </Button>
               </div>
             </CardContent>
