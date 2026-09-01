@@ -16,6 +16,7 @@ import { TermsOfUsePage } from "./components/TermsOfUsePage";
 import { ContactFormModal } from "./components/ContactFormModal";
 import { Phone, MessageSquare } from "lucide-react";
 import { Button } from "./components/ui/button";
+import { generalPhone } from "./utils/contacts";
 
 export default function App() {
   // Initialize from URL query parameter or hash
@@ -184,7 +185,7 @@ export default function App() {
         <Button
           size="lg"
           className="rounded-full w-16 h-16 shadow-2xl bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-110 transition-all duration-200"
-          onClick={() => window.location.href = "tel:+77055012010"}
+          onClick={() => window.location.href = generalPhone.href}
           title="Позвонить нам"
         >
           <Phone className="h-6 w-6" />

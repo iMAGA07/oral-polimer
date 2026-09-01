@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Instagram, Send } from "lucide-react";
+import { phones } from "../utils/contacts";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -117,15 +118,22 @@ export function Footer({ onNavigate }: FooterProps = {}) {
                   г. Уральск, Тюленина 47/1
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 flex-shrink-0 text-accent" />
-                <a
-                  href="tel:+77055012010"
-                  className="text-primary-foreground/70 hover:text-accent transition-colors duration-200"
-                >
-                  +7 (705) 501-20-10
-                </a>
-              </li>
+              {phones.map((phone) => (
+                <li key={phone.id} className="flex items-start gap-3">
+                  <Phone className="h-5 w-5 mt-0.5 flex-shrink-0 text-accent" />
+                  <span>
+                    <span className="block text-[11px] uppercase tracking-wide text-primary-foreground/50">
+                      {phone.label}
+                    </span>
+                    <a
+                      href={phone.href}
+                      className="text-primary-foreground/70 hover:text-accent transition-colors duration-200"
+                    >
+                      {phone.display}
+                    </a>
+                  </span>
+                </li>
+              ))}
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 flex-shrink-0 text-accent" />
                 <a

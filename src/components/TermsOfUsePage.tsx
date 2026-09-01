@@ -93,7 +93,7 @@ export function TermsOfUsePage({ onNavigate }: TermsOfUsePageProps) {
                         <p>БИН: (указывается при регистрации)</p>
                         <p>Юридический адрес: Республика Казахстан, Западно-Казахстанская область, г. Уральск</p>
                         <p>Основной вид деятельности: Строительство жилых и нежилых зданий, производство строительных материалов</p>
-                        <p>Телефон: <a href="tel:+77055012010" className="text-accent hover:underline">+7 (705) 501-20-10</a></p>
+                        <p>Телефон: <a href="tel:+77757077700" className="text-accent hover:underline">+7 (775) 707-77-00</a></p>
                       </div>
                     </div>
                   </div>
@@ -324,7 +324,7 @@ export function TermsOfUsePage({ onNavigate }: TermsOfUsePageProps) {
                     <div className="space-y-2">
                       <p className="font-semibold text-primary">ТОО "Орал Полимер"</p>
                       <p>Адрес: Республика Казахстан, Западно-Казахстанская область, г. Уральск</p>
-                      <p>Телефон: <a href="tel:+77055012010" className="text-accent hover:underline">+7 (705) 501-20-10</a></p>
+                      <p>Телефон: <a href="tel:+77757077700" className="text-accent hover:underline">+7 (775) 707-77-00</a></p>
                       <p>WhatsApp: <a href="https://wa.me/77055012010" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">+7 (705) 501-20-10</a></p>
                       <p>Instagram: <a href="https://www.instagram.com/oralpolimer/" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">@oralpolimer</a></p>
                     </div>

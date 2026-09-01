@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail, Clock, Instagram, MessageCircle } from "lucide-rea
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { useEffect, useRef } from "react";
+import { phones } from "../utils/contacts";
 
 // Separate Map Component to handle lifecycle
 function MapViewer({ coordinates }: { coordinates: [number, number] }) {
@@ -79,8 +80,7 @@ export function ContactsPage() {
       icon: Phone,
       title: "Телефон",
       items: [
-        { label: "Отдел продаж", value: "+7 (705) 501-20-10" },
-        { label: "Офис", value: "+7 (711) 234-56-78" },
+        ...phones.map((phone) => ({ label: phone.label, value: phone.display })),
         { label: "WhatsApp", value: "+7 (705) 501-20-10" },
       ],
     },

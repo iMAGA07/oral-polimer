@@ -141,11 +141,11 @@ export function ThankYouPage() {
               Есть срочный вопрос?
             </p>
             <a
-              href="tel:+77055012010"
+              href="tel:+77757077700"
               className="text-[#FDB913] hover:text-[#f5a400] text-lg transition-colors inline-flex items-center gap-2"
             >
               <Phone className="w-4 h-4" />
-              +7 (705) 501-20-10
+              +7 (775) 707-77-00
             </a>
           </motion.div>
         </motion.div>

@@ -1,7 +1,8 @@
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import Frame1 from "../imports/Frame1";
 import { Button } from "./ui/button";
+import { phones, generalPhone } from "../utils/contacts";
 
 interface HeaderProps {
   currentSection: string;
@@ -86,16 +87,41 @@ export function Header({ currentSection, onNavigate }: HeaderProps) {
 
           {/* Contact Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="tel:+77055012010"
-              className={`text-sm font-medium transition-all hover:text-accent ${
-                scrolled || currentSection !== "home" ? "text-primary" : "text-white"
-              }`}
-            >
-              +7 (705) 501-20-10
-            </a>
+            {/* Телефоны по направлениям: общий номер виден сразу, остальные — в списке */}
+            <div className="relative group">
+              <div
+                className={`flex items-center gap-1.5 text-sm font-medium transition-all cursor-pointer ${
+                  scrolled || currentSection !== "home" ? "text-primary" : "text-white"
+                } group-hover:text-accent`}
+              >
+                <a href={generalPhone.href} className="whitespace-nowrap">
+                  {generalPhone.display}
+                </a>
+                <ChevronDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />
+              </div>
+
+              <div className="absolute right-0 top-full pt-4 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
+                <div className="w-80 bg-white rounded-2xl shadow-2xl border border-border/60 p-2">
+                  {phones.map((phone) => (
+                    <a
+                      key={phone.id}
+                      href={phone.href}
+                      className="block px-3 py-2.5 rounded-xl hover:bg-secondary transition-colors duration-200"
+                    >
+                      <span className="block text-[11px] uppercase tracking-wide text-muted-foreground mb-0.5">
+                        {phone.label}
+                      </span>
+                      <span className="block text-primary font-semibold">{phone.display}</span>
+                      <span className="block text-xs text-muted-foreground mt-0.5">{phone.hint}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <Button
               size="sm"
+              onClick={() => (window.location.href = generalPhone.href)}
               className="bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-xl hover:scale-105 transition-all duration-200 rounded-full px-6"
             >
               <Phone className="mr-2 h-4 w-4" />
@@ -139,15 +165,22 @@ export function Header({ currentSection, onNavigate }: HeaderProps) {
                 </button>
               ))}
               <div className="px-4 pt-4 mt-2 border-t border-border">
-                <a
-                  href="tel:+77055012010"
-                  className="block text-primary font-medium mb-3"
+                <div className="space-y-3 mb-4">
+                  {phones.map((phone) => (
+                    <a key={phone.id} href={phone.href} className="block">
+                      <span className="block text-[11px] uppercase tracking-wide text-muted-foreground">
+                        {phone.label}
+                      </span>
+                      <span className="block text-primary font-medium">{phone.display}</span>
+                    </a>
+                  ))}
+                </div>
+                <Button
+                  onClick={() => (window.location.href = generalPhone.href)}
+                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90 rounded-full"
                 >
-                  +7 (705) 501-20-10
-                </a>
-                <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 rounded-full">
                   <Phone className="mr-2 h-4 w-4" />
-                  Заказать звонок
+                  Позвонить
                 </Button>
               </div>
             </nav>
